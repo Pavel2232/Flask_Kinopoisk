@@ -4,7 +4,7 @@
 # Пример
 
 from flask import Flask
-from flask_restx import Api,namespace
+from flask_restx import Api,Resource
 
 from config import Config
 from setup_db import db
