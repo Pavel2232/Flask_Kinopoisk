@@ -7,7 +7,7 @@ from app.views.genre import genre_ns
 from app.views.director import director_ns
 
 
-def create_app(config: Config):
+def create_app(config: Config)-> Flask:
     application = Flask(__name__)
     application.config.from_object(config)
     application.app_context().push()

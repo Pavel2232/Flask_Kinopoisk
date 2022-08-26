@@ -14,7 +14,7 @@ class DirectorView(Resource):
 
     def get(self):
         all_director = director_service.get_all()
-        return "",200 #director_schema.dump(all_director), 200
+        return directors_schema.dump(all_director), 200
 
     def post(self):
         req_json = request.json
