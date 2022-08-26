@@ -14,12 +14,16 @@ class DirectorView(Resource):
 
     def get(self):
         all_director = director_service.get_all()
-        return  director_schema.dump(all_director), 200
+        return "",200 #director_schema.dump(all_director), 200
 
     def post(self):
         req_json = request.json
         director_service.create(req_json)
         return "", 201
+
+
+@director_ns.route('/<int:id>')
+class DirectorView(Resource):
     def put(self,id):
         req_json = request.json
         req_json["id"] = id

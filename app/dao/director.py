@@ -22,10 +22,9 @@ class DirectorDAO:
         self.session.add(director)
         self.session.commit()
 
+
     def delete(self, id):
         director = self.get_one(id)
 
         self.session.delete(director)
         self.session.commit()
-
-        return ""

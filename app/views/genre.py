@@ -22,6 +22,9 @@ class GenreView(Resource):
         genre_service.create(req_json)
         return "", 201
 
+@genre_ns.route('/<int:id>')
+class GenreView(Resource):
+
     def put(self, id):
         req_json = request.json
         req_json["id"] = id

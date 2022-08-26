@@ -1,23 +1,29 @@
 """Модель фильмов"""
+from app.models.movie import Movie
 class MovieDAO:
     def __init__(self,session):
         self.session = session
 
-    def get_one(self,id):
-        pass
+    def get_one(self, id):
+        return self.session.query(Movie).get(id)
 
     def get_all(self):
-        pass
+        return self.session.query(Movie).all()
 
-    def create(self,movie):
-        pass
+    def create(self, data):
+        movie = Movie(**data)
 
+        self.session.add(data)
+        self.session.commit()
 
-    def get_update(self, movie):
-        pass
+        return movie
 
-    def update_path(self, movie):
-        pass
+    def update(self, movie):
+        self.session.add(movie)
+        self.session.commit()
 
     def delete(self, id):
-        pass
+        movie = self.get_one(id)
+
+        self.session.delete(movie)
+        self.session.commit()

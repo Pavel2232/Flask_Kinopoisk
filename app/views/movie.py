@@ -22,6 +22,10 @@ class MovieView(Resource):
         movies_service.create(req_json)
         return "", 201
 
+
+
+@movie_ns.route('/<int:id')
+class MovieView(Resource):
     def put(self, id):
         req_json = request.json
         req_json["id"] = id
