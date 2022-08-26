@@ -24,7 +24,7 @@ class MovieView(Resource):
 
 
 
-@movie_ns.route('/<int:id')
+@movie_ns.route('/<int:id>')
 class MovieView(Resource):
     def put(self, id):
         req_json = request.json
