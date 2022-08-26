@@ -1,24 +1,12 @@
 """Модель жанров"""
+from app.setup_db import db
+from marshmallow import Schema, fields
+class Genre(db.Model):
+    __tablename__ = 'genre'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
 
 
-class GenreDAO:
-    def __init__(self, session):
-        self, session = session
-
-    def get_one(self, id):
-        pass
-
-    def get_all(self):
-        pass
-    def create(self,genre):
-        pass
-
-
-    def get_update(self, genre):
-        pass
-
-    def update_path(self, genre):
-        pass
-
-    def delete(self, id):
-        pass
+class GenreSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str()

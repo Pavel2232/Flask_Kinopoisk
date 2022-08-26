@@ -1,7 +1,20 @@
-# этот файл для глобальных констант. чтобы не хардкодить строки/числа в коде, выносите их сюда.
-# например вместо C:\\Windows в коде, создайте константу WINDOWS_PATH здесь и присвойте ей значение
+"""Импортируем сервисы дао сессии бд"""
+from app.dao.director import DirectorDAO
+from app.dao.movie import MovieDAO
+from app.dao.genre import GenreDAO
+from app.service.director import DirectorService
+from app.service.genre import GenreService
+from app.service.movie import MovieService
 
-# Пример
+from app.setup_db import db
 
-# CONSTANT_NAME = "value"
-# LOG_DIR = "logs"
+movies_dao = MovieDAO(db.session)
+movies_service = MovieService(movies_dao)
+
+
+director_dao = DirectorDAO(db.session)
+director_service = DirectorService(director_dao)
+
+genre_dao = GenreDAO(db.session)
+genre_service = GenreService(director_dao)
+

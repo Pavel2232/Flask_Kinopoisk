@@ -1,23 +1,29 @@
 """Модель фильмов"""
-class MovieDAO:
-    def __init__(self,session):
-        self,session = session
 
-    def get_one(self,id):
-        pass
-
-    def get_all(self):
-        pass
-
-    def create(self,movie):
-        pass
+from app.setup_db import db
+from marshmallow import Schema, fields
 
 
-    def get_update(self, movie):
-        pass
+class Movie(db.Model):
+    __tablename__ = 'movie'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255))
+    description = db.Column(db.String(255))
+    trailer = db.Column(db.String(255))
+    year = db.Column(db.Integer)
+    rating = db.Column(db.Float)
+    genre_id = db.Column(db.Integer, db.ForeignKey("genre.id"))
+    genre = db.relationship("Genre")
+    director_id = db.Column(db.Integer, db.ForeignKey("director.id"))
+    director = db.relationship("Director")
 
-    def update_path(self, movie):
-        pass
 
-    def delete(self, id):
-        pass
+class MovieSchema(Schema):
+    id = fields.Int(dump_only=True)
+    title = fields.Str()
+    description = fields.Str()
+    trailer = fields.Str()
+    year = fields.Int()
+    rating = fields.Float()
+    genre_id = fields.Int()
+    director_id = fields.Int()
