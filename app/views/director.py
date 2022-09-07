@@ -2,7 +2,7 @@
 from flask_restx import Namespace, Resource
 from flask import request
 from app.models.director import DirectorSchema
-from app.constants import director_service
+from app.constant import director_service
 
 director_ns = Namespace('director')
 

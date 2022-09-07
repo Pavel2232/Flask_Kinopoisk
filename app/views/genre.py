@@ -2,7 +2,7 @@
 from flask_restx import Namespace, Resource
 from flask import request
 from app.models.genre import GenreSchema
-from app.constants import genre_service
+from app.constant import genre_service
 
 genre_ns = Namespace('genre')
 

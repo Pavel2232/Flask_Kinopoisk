@@ -2,7 +2,8 @@
 from flask_restx import Namespace, Resource
 from flask import request
 from app.models.movie import MovieSchema
-from app.constants import movies_service
+from app.constant import movies_service
+
 
 movie_ns = Namespace('movie')
 
