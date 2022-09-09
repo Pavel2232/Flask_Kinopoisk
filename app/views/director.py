@@ -1,17 +1,21 @@
 """Вью режиссеров"""
 from flask_restx import Namespace, Resource
 from flask import request
+
+from app.decorators import auth_required, admin_required
 from app.models.director import DirectorSchema
 from app.constant import director_service
 
 director_ns = Namespace('director')
 
 director_schema = DirectorSchema()
-directors_schema = DirectorSchema(many= True)
+directors_schema = DirectorSchema(many=True)
+
 
 @director_ns.route('/')
 class DirectorView(Resource):
 
+    @auth_required
     def get(self):
         all_director = director_service.get_all()
         return directors_schema.dump(all_director), 200
@@ -24,7 +28,8 @@ class DirectorView(Resource):
 
 @director_ns.route('/<int:id>')
 class DirectorView(Resource):
-    def put(self,id):
+    @admin_required
+    def put(self, id):
         req_json = request.json
         req_json["id"] = id
 
@@ -32,7 +37,8 @@ class DirectorView(Resource):
 
         return "", 204
 
-    def patch(self,id):
+    @admin_required
+    def patch(self, id):
         req_json = request.json
         req_json["id"] = id
 
@@ -40,6 +46,7 @@ class DirectorView(Resource):
 
         return "", 204
 
-    def delete(self,id):
+    @admin_required
+    def delete(self, id):
         director_service.delete(id)
-        return "",204
+        return "", 204

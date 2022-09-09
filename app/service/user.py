@@ -1,12 +1,8 @@
 """Сервис пользователей"""
 import base64
-import calendar
-import datetime
 import hashlib
 import hmac
-import jwt
 from app.dao.user import UserDAO
-# from app.constant import PWD_HASH_SALT,PWD_HASH_ITERATIONS, secret , algo
 PWD_HASH_SALT: bytes = b'secret here'
 PWD_HASH_ITERATIONS = 100_000
 secret = 's3cR$eT'
@@ -67,5 +63,5 @@ class UserService:
     def compare_passwords(self, password_hash, other_password) -> bool:
         return hmac.compare_digest(
             base64.b64decode(password_hash),
-            hashlib.pbkdf2_hmac('sha256', other_password, PWD_HASH_SALT, PWD_HASH_ITERATIONS)
+            hashlib.pbkdf2_hmac('sha256', other_password.encode(), PWD_HASH_SALT, PWD_HASH_ITERATIONS)
         )

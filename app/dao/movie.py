@@ -1,7 +1,9 @@
 """Модель фильмов"""
 from app.models.movie import Movie
+
+
 class MovieDAO:
-    def __init__(self,session):
+    def __init__(self, session):
         self.session = session
 
     def get_one(self, id):

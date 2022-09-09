@@ -1,8 +1,9 @@
 """Сервис фильмов"""
 from app.dao.movie import MovieDAO
 
+
 class MovieService:
-    def __init__(self, dao:MovieDAO):
+    def __init__(self, dao: MovieDAO):
         self.dao = dao
 
     def get_one(self, id):
@@ -19,13 +20,13 @@ class MovieService:
         movie = self.get_one(id)
 
         movie.id = data.get("id")
-        movie.title =data.get("title")
-        movie.description =data.get("description")
-        movie.trailer =data.get("trailer")
-        movie.year =data.get("year")
-        movie.rating =data.get("rating")
-        movie.genre_id =data.get("genre_id")
-        movie.director_id =data.get("director_id")
+        movie.title = data.get("title")
+        movie.description = data.get("description")
+        movie.trailer = data.get("trailer")
+        movie.year = data.get("year")
+        movie.rating = data.get("rating")
+        movie.genre_id = data.get("genre_id")
+        movie.director_id = data.get("director_id")
 
         self.dao.update(movie)
 
@@ -37,7 +38,7 @@ class MovieService:
         if "title" in data:
             movie.title = data.get("title")
         if "description" in data:
-            movie.description =  data.get("description")
+            movie.description = data.get("description")
         if "trailer" in data:
             movie.trailer = data.get("trailer")
         if "year" in data:

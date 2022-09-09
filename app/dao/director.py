@@ -1,5 +1,7 @@
 """Модель режисеров"""
 from app.models.director import Director
+
+
 class DirectorDAO:
     def __init__(self, session):
         self.session = session
@@ -10,7 +12,7 @@ class DirectorDAO:
     def get_all(self):
         return self.session.query(Director).all()
 
-    def create(self,data):
+    def create(self, data):
         director = Director(**data)
 
         self.session.add(data)
@@ -21,7 +23,6 @@ class DirectorDAO:
     def update(self, director):
         self.session.add(director)
         self.session.commit()
-
 
     def delete(self, id):
         director = self.get_one(id)

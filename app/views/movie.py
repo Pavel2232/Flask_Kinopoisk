@@ -1,6 +1,8 @@
 """Вью фильмов"""
 from flask_restx import Namespace, Resource
 from flask import request
+
+from app.decorators import auth_required, admin_required
 from app.models.movie import MovieSchema
 from app.constant import movies_service
 
@@ -14,10 +16,12 @@ movies_schema = MovieSchema(many=True)
 @movie_ns.route('/')
 class MovieView(Resource):
 
+    @auth_required
     def get(self):
         all_movie = movies_service.get_all()
         return movies_schema.dump(all_movie), 200
 
+    @admin_required
     def post(self):
         req_json = request.json
         movies_service.create(req_json)
@@ -27,6 +31,7 @@ class MovieView(Resource):
 
 @movie_ns.route('/<int:id>')
 class MovieView(Resource):
+    @admin_required
     def put(self, id):
         req_json = request.json
         req_json["id"] = id
@@ -35,6 +40,7 @@ class MovieView(Resource):
 
         return "", 204
 
+    @admin_required
     def patch(self, id):
         req_json = request.json
         req_json["id"] = id
@@ -43,6 +49,7 @@ class MovieView(Resource):
 
         return "", 204
 
+    @admin_required
     def delete(self, id):
         movies_service.delete(id)
         return "", 204
