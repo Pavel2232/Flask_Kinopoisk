@@ -23,7 +23,7 @@ class AuthView(Resource):
         all_users = user_service.get_all()
         return users_schema.dump(all_users), 200
 
-    @auth_required
+    
     def post(self):
         data = request.json
 
@@ -37,7 +37,7 @@ class AuthView(Resource):
 
         return tokens, 201
 
-    @admin_required
+    
     def put(self):
         data = request.json
         token = data.get("refresh_token")
