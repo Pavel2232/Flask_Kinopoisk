@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_restx import Api
 from app.config import Config
 from app.setup_db import db
@@ -19,7 +19,11 @@ def create_app(config: Config)-> Flask:
 
 def configur_app(application: Flask):
     db.init_app(application)
-    api = Api(app)
+    api = Api(title="Flask Course Project 3", doc="/docs")
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+    
     api.add_namespace(movie_ns)
     api.add_namespace(genre_ns)
     api.add_namespace(director_ns)
