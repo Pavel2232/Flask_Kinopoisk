@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_restx import Api
 from app.config import Config
 from app.setup_db import db
+from app.views.favorite_genre import genref_ns
 from app.views.movie import movie_ns
 from app.views.genre import genre_ns
 from app.views.director import director_ns
@@ -19,16 +20,13 @@ def create_app(config: Config)-> Flask:
 
 def configur_app(application: Flask):
     db.init_app(application)
-    api = Api(title="Flask Course Project 3", doc="/docs")
-    @app.route('/')
-    def index():
-        return render_template('index.html')
-    
+    api =Api(application)
     api.add_namespace(movie_ns)
     api.add_namespace(genre_ns)
     api.add_namespace(director_ns)
     api.add_namespace(user_ns)
     api.add_namespace(auth_ns)
+    api.add_namespace(genref_ns)
     # db.drop_all()
     # db.create_all()
 

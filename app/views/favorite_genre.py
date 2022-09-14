@@ -5,13 +5,13 @@ from app.decorators import auth_required
 from app.models.favorite_genre import GenreFSchema
 from app.constant import genre_service
 
-genre_ns = Namespace('favorites')
+genref_ns = Namespace('favorites')
 
 genref_schema = GenreFSchema()
 genrefs_schema = GenreFSchema(many=True)
 
 
-@genre_ns.route('/movies/<int:id>')
+@genref_ns.route('/movies/<int:id>')
 class GenreFView(Resource):
 
     @auth_required
