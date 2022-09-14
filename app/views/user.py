@@ -6,8 +6,7 @@ from app.constant import user_service, auth_service
 import datetime
 import calendar
 
-
-
+from app.decorators import admin_required
 
 user_ns = Namespace('user')
 
@@ -17,15 +16,20 @@ users_schema = UserSchema(many=True)
 
 @user_ns.route('/')
 class UserView(Resource):
-    def post(self):
-        user = request.json
 
-        username= user.get("username",None)
-        password= user.get("password",None)
 
-        if None in [username,password]:
-            return abort(400)
+    @admin_required
+    def get(self):
+        data = request.json
 
-        user_service.create(user)
+        user = user_service.get_one("email")
+        return users_schema.dump(user), 200
 
-        return "",201
+
+    @admin_required
+    def patch(self):
+        data = request.json
+
+        user = user_service.update_path(data)
+
+        return "", 201

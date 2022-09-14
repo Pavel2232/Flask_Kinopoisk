@@ -1,10 +1,12 @@
 """Импортируем сервисы дао сессии бд"""
 from app.dao.director import DirectorDAO
+from app.dao.genre_favorite import GenreFDAO
 from app.dao.movie import MovieDAO
 from app.dao.genre import GenreDAO
 from app.dao.user import UserDAO
 from app.service.auth import AuthService
 from app.service.director import DirectorService
+from app.service.favorite_genre import GenreFService
 from app.service.genre import GenreService
 from app.service.movie import MovieService
 from app.service.user import UserService
@@ -27,5 +29,6 @@ user_service = UserService(user_dao)
 
 auth_service = AuthService(user_service)
 
-
+genref_dao = GenreFDAO(db.session)
+genref_service = GenreFService(genref_dao)
 

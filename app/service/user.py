@@ -22,8 +22,8 @@ class UserService:
             current_app.config["PWD_HASH_ITERATIONS"]
         ).decode("utf-8", "ignore")
 
-    def get_one(self, id):
-        return self.dao.get_one(id)
+    def get_one(self, email):
+        return self.dao.get_one(email)
 
     def get_all(self):
         return self.dao.get_all()
@@ -33,18 +33,36 @@ class UserService:
         return self.dao.create(data)
 
     def update(self, data):
-        id = data.get("id")
-        user = self.get_one(id)
+        email = data.get("email")
+        user = self.get_one(email)
 
-        user.id = data.get("id")
-        user.username =data.get("username")
+
+        user.username =data.get("email")
         user.password =data.get("password")
+        user.role =data.get("username")
+        user.role =data.get("surname")
+        user.role =data.get("favorite_genre")
         user.role =data.get("role")
 
         self.dao.update(user)
 
     def update_path(self, data):
-        data["password"] = self.make_user_password_hash(data["password"])
+        email = data.get("email")
+        user = self.get_one(email)
+
+        if "email" in data:
+            user.id = data.get("email")
+        if "password" in data:
+            user.password = self.make_user_password_hash(data["password"])
+        if "username" in data:
+            user.description = data.get("username")
+        if "surname" in data:
+            user.trailer = data.get("surname")
+        if "favorite_genre" in data:
+            user.year = data.get("favorite_genre")
+        if "role" in data:
+            user.rating = data.get("role")
+
         self.dao.update(data)
         return self.dao
 

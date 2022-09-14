@@ -15,15 +15,24 @@ auth_ns = Namespace('auth')
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
-
-@auth_ns.route('/')
+@auth_ns.route("/register")
 class AuthView(Resource):
-    @auth_required
-    def get(self):
-        all_users = user_service.get_all()
-        return users_schema.dump(all_users), 200
+    def post(self):
+        user = request.json
 
-    
+        email= user.get("email",None)
+        password= user.get("password",None)
+
+        if None in [email,password]:
+            return abort(400)
+
+        user_service.create(user)
+
+        return "",201
+
+@auth_ns.route('/login')
+class AuthView(Resource):
+
     def post(self):
         data = request.json
 
@@ -72,3 +81,4 @@ class AuthView(Resource):
     def delete(self, id):
         user_service.delete(id)
         return "", 204
+

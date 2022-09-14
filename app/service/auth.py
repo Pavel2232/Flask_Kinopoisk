@@ -14,13 +14,13 @@ class AuthService:
         self.user_service = user_service
 
     def chek_user_and_creat(self, data):
-        username = data.get("username", None)
+        email = data.get("email", None)
         password = data.get("password", None)
 
-        if None in [username, password]:
+        if None in [email, password]:
             return "", 400
 
-        if not self.user_service.get_one(data.get("id")):
+        if not self.user_service.get_one(data.get("email")):
             user = self.user_service.create(data)
 
         else:
@@ -28,8 +28,8 @@ class AuthService:
 
         return self.generate_token(data)
 
-    def generate_token(self, username, password, is_refresh=False):
-        user = self.user_service.get_one(username)
+    def generate_token(self, email, password, is_refresh=False):
+        user = self.user_service.get_one(email)
 
         if user is None:
             raise abort(404)
@@ -38,7 +38,7 @@ class AuthService:
             if not self.user_service.compare_passwords(user.password, password):
                 abort(400)
 
-        data = {"username": user.username,
+        data = {"username": user.email,
                 "role": user.role
                 }
 
@@ -56,6 +56,6 @@ class AuthService:
 
     def approve_refresh_token(self, refresh_token):
         data = jwt.decode(jwt=refresh_token, key=current_app.config["SECRET"], algorithm=current_app.config["ALGO"])
-        username = data.get("username")
+        user = data.get("email")
 
-        return self.generate_token(username, None, is_refresh=True)
+        return self.generate_token(user, None, is_refresh=True)
