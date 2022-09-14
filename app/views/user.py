@@ -2,9 +2,7 @@ import jwt
 from flask_restx import Namespace, Resource, abort
 from flask import request
 from app.models.user import UserSchema
-from app.constant import user_service, auth_service
-import datetime
-import calendar
+from app.constant import user_service
 
 from app.decorators import admin_required
 

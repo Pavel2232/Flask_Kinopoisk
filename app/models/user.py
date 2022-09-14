@@ -9,7 +9,7 @@ class User(db.Model):
     password = db.Column(db.String,nullable = False)
     username = db.Column(db.String(60))
     surname = db.Column(db.String(100))
-    favorite_genre = db.Column(db.String(100))
+    favorite_genre = db.Column(db.Integer,db.ForeignKey("genre_fav.id"))
     role = db.Column(db.String(30))
 
 
