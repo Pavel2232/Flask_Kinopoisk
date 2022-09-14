@@ -3,12 +3,9 @@ import calendar
 import datetime
 
 import jwt
+from flask import current_app
 from flask_restx import abort
 
-PWD_HASH_SALT: bytes = b'secret here'
-PWD_HASH_ITERATIONS = 100_000
-secret = 's3cR$eT'
-algo = 'HS256'
 
 
 class AuthService:
@@ -45,20 +42,20 @@ class AuthService:
                 "role": user.role
                 }
 
-        min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+        min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=current_app.config["TOKEN_EXPIRE_MINUTES"])
         data["exp"] = calendar.timegm(min30.timetuple())
-        access_token = jwt.encode(data, secret, algorithm=algo)
+        access_token = jwt.encode(data, current_app.config["SECRET"], algorithm=current_app.config["ALGO"])
 
-        days130 = datetime.datetime.utcnow() + datetime.timedelta(days=130)
+        days130 = datetime.datetime.utcnow() + datetime.timedelta(days=current_app.config["TOKEN_EXPIRE_DAY"])
         data["exp"] = calendar.timegm(days130.timetuple())
-        refresh_token = jwt.encode(data, secret, algorithm=algo)
+        refresh_token = jwt.encode(data, current_app.config["SECRET"], algorithm=current_app.config["ALGO"])
 
         return {"access_token": access_token,
                 "refresh_token": refresh_token
                 }
 
     def approve_refresh_token(self, refresh_token):
-        data = jwt.decode(jwt=refresh_token, key=secret, algorithms=[algo])
+        data = jwt.decode(jwt=refresh_token, key=current_app.config["SECRET"], algorithm=current_app.config["ALGO"])
         username = data.get("username")
 
         return self.generate_token(username, None, is_refresh=True)

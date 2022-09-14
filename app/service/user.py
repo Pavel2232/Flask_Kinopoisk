@@ -2,11 +2,10 @@
 import base64
 import hashlib
 import hmac
+
+from flask import current_app
+
 from app.dao.user import UserDAO
-PWD_HASH_SALT: bytes = b'secret here'
-PWD_HASH_ITERATIONS = 100_000
-secret = 's3cR$eT'
-algo = 'HS256'
 
 
 
@@ -19,8 +18,8 @@ class UserService:
         return hashlib.pbkdf2_hmac(
             'sha256',
             password.encode('utf-8'),  # Convert the password to bytes
-            PWD_HASH_SALT,
-            PWD_HASH_ITERATIONS
+            current_app.config["PWD_HASH_SALT"],
+            current_app.config["PWD_HASH_ITERATIONS"]
         ).decode("utf-8", "ignore")
 
     def get_one(self, id):
@@ -56,12 +55,12 @@ class UserService:
         return base64.b64encode(hashlib.pbkdf2_hmac(
             'sha256',
             password.encode('utf-8'),
-            PWD_HASH_SALT,
-            PWD_HASH_ITERATIONS
+            current_app.config["PWD_HASH_SALT"],
+            current_app.config["PWD_HASH_ITERATIONS"]
         ))
 
     def compare_passwords(self, password_hash, other_password) -> bool:
         return hmac.compare_digest(
             base64.b64decode(password_hash),
-            hashlib.pbkdf2_hmac('sha256', other_password.encode(), PWD_HASH_SALT, PWD_HASH_ITERATIONS)
+            hashlib.pbkdf2_hmac('sha256', other_password.encode(),current_app.config["PWD_HASH_SALT"],current_app.config["PWD_HASH_ITERATIONS"])
         )

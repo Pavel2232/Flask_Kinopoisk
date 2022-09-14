@@ -5,7 +5,7 @@ Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im5hZG
 
 GET http://127.0.0.1:5000/auth/
 Content-Type: application/json
-Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im5hZGV6ZGEiLCJyb2xlIjoiQWRtaW4iLCJleHAiOjE2NjI3MjgxNTB9.UCnn5u_Xwe9lZd0ZcfTAHQnb49vTF77cC9K6_PQrdu4
+Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IlFXIiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjYzMTU0NzgzfQ.svJu5TIOkjhtCQyVH2rqCX0sl4UFvaBRweYvpo0n_G0
 
 
 ###
@@ -14,7 +14,7 @@ POST http://127.0.0.1:5000/user/
 Content-Type: application/json
 
 {
-  "username": "nadezda",
+  "username": "QW",
   "password": "test",
   "role": "Admin"
 }
@@ -25,6 +25,6 @@ POST http://127.0.0.1:5000/auth/
 Content-Type: application/json
 
 {
-    "username": "nadezda",
+    "username": "QW",
     "password": "test"
 }

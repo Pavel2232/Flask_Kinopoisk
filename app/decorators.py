@@ -1,8 +1,7 @@
 import jwt
-from flask import request
+from flask import request,current_app
 from flask_restx import abort
 
-from app.constant import secret, algo
 
 
 def auth_required(func):
@@ -13,7 +12,7 @@ def auth_required(func):
         data = request.headers['Authorization']
         token = data.split("Bearer ")[-1]
         try:
-            jwt.decode(token, secret, algorithms=[algo])
+            jwt.decode(token, current_app.config["PWD_HASH_SALT"], algorithms=current_app.config["PWD_HASH_ITERATIONS"])
         except Exception as e:
             print("JWT Decode Exception", e)
             abort(401)
@@ -30,7 +29,7 @@ def admin_required(func):
         data = request.headers['Authorization']
         token = data.split("Bearer ")[-1]
         try:
-            user = jwt.decode(token, secret, algorithms=[algo])
+            user = jwt.decode(token,current_app.config["PWD_HASH_SALT"], algorithms=current_app.config["PWD_HASH_ITERATIONS"])
             role = user.get("role")
             if role != "Admin":
                 abort(400)

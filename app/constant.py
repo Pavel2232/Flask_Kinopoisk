@@ -11,10 +11,6 @@ from app.service.user import UserService
 
 from app.setup_db import db
 
-PWD_HASH_SALT: bytes = b'secret here'
-PWD_HASH_ITERATIONS = 100_000
-secret = 's3cR$eT'
-algo = 'HS256'
 
 movies_dao = MovieDAO(db.session)
 movies_service = MovieService(movies_dao)
