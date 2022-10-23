@@ -5,7 +5,7 @@ import hmac
 
 from flask import current_app
 
-from app.dao.user import UserDAO
+from dao.user import UserDAO
 
 
 

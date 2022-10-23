@@ -2,9 +2,9 @@
 from flask_restx import Namespace, Resource
 from flask import request
 
-from app.decorators import auth_required, admin_required
-from app.models.genre import GenreSchema
-from app.constant import genre_service
+from decorators import auth_required, admin_required
+from models.genre import GenreSchema
+from constant import genre_service
 
 genre_ns = Namespace('genre')
 

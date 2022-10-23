@@ -1,5 +1,5 @@
 """Модель режисеров"""
-from app.models.director import Director
+from models.director import Director
 
 
 class DirectorDAO:

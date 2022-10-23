@@ -1,13 +1,13 @@
 from flask import Flask
 from flask_restx import Api
-from app.config import Config
-from app.setup_db import db
-from app.views.favorite_genre import genref_ns
-from app.views.movie import movie_ns
-from app.views.genre import genre_ns
-from app.views.director import director_ns
-from app.views.auth import  auth_ns
-from app.views.user import user_ns
+from config import Config
+from setup_db import db
+from views.favorite_genre import genref_ns
+from views.movie import movie_ns
+from views.genre import genre_ns
+from views.director import director_ns
+from views.auth import  auth_ns
+from views.user import user_ns
 
 
 def create_app(config: Config)-> Flask:

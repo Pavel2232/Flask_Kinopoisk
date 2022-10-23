@@ -1,5 +1,5 @@
 """Сервис фильмов"""
-from app.dao.movie import MovieDAO
+from dao.movie import MovieDAO
 
 
 class MovieService:

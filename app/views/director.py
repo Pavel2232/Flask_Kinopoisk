@@ -2,9 +2,9 @@
 from flask_restx import Namespace, Resource
 from flask import request
 
-from app.decorators import auth_required, admin_required
-from app.models.director import DirectorSchema
-from app.constant import director_service
+from decorators import auth_required, admin_required
+from models.director import DirectorSchema
+from constant import director_service
 
 director_ns = Namespace('director')
 
