@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restx import Api
 from config import Config
-from setup_db import db
+from setup_db import db, migrate
 from views.favorite_genre import genref_ns
 from views.movie import movie_ns
 from views.genre import genre_ns
@@ -14,12 +14,13 @@ def create_app(config: Config)-> Flask:
     application = Flask(__name__)
     application.config.from_object(config)
     application.app_context().push()
-
+    db.init_app(application)
+    migrate.init_app(application, db)
     return application
 
 
 def configur_app(application: Flask):
-    db.init_app(application)
+  #  db.init_app(application)
     api =Api(application)
     api.add_namespace(movie_ns)
     api.add_namespace(genre_ns)
