@@ -20,7 +20,6 @@ def create_app(config: Config)-> Flask:
 
 
 def configur_app(application: Flask):
-  #  db.init_app(application)
     api =Api(application)
     api.add_namespace(movie_ns)
     api.add_namespace(genre_ns)
@@ -28,12 +27,10 @@ def configur_app(application: Flask):
     api.add_namespace(user_ns)
     api.add_namespace(auth_ns)
     api.add_namespace(genref_ns)
-    # db.drop_all()
-    # db.create_all()
 
 
 if __name__ == '__main__':
     app_config = Config()
     app = create_app(app_config)
     configur_app(app)
-    app.run(debug=True)
+    app.run()
