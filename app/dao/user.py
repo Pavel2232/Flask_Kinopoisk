@@ -1,5 +1,5 @@
 """Модель пользователей"""
-from models.user import User
+from app.models.user import User
 
 
 class UserDAO:

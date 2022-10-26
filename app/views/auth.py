@@ -3,9 +3,9 @@
 from flask_restx import Namespace, Resource, abort
 from flask import request
 
-from decorators import admin_required
-from models.user import UserSchema
-from constant import user_service, auth_service
+from app.decorators import admin_required
+from app.models.user import UserSchema
+from app.constant import user_service, auth_service
 
 
 

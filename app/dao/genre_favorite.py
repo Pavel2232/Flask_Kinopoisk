@@ -1,5 +1,5 @@
 """Модель любимых жанров"""
-from models.favorite_genre import GenreF
+from app.models.favorite_genre import GenreF
 
 
 class GenreFDAO:

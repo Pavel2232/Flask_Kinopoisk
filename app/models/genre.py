@@ -1,5 +1,5 @@
 """Модель жанров"""
-from setup_db import db
+from app.setup_db import db
 from marshmallow import Schema, fields
 class Genre(db.Model):
     __tablename__ = 'genre'

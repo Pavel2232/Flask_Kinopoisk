@@ -1,6 +1,6 @@
 """Модель фильмов"""
 
-from setup_db import db
+from app.setup_db import db
 from marshmallow import Schema, fields
 
 

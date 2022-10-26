@@ -2,9 +2,9 @@
 from flask_restx import Namespace, Resource
 from flask import request
 
-from decorators import auth_required, admin_required
-from models.movie import MovieSchema
-from constant import movies_service
+from app.decorators import auth_required, admin_required
+from app.models.movie import MovieSchema
+from app.constant import movies_service
 
 
 movie_ns = Namespace('movie')

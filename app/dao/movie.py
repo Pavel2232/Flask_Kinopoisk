@@ -1,5 +1,5 @@
 """Модель фильмов"""
-from models.movie import Movie
+from app.models.movie import Movie
 
 
 class MovieDAO:

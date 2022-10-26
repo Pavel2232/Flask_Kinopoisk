@@ -1,5 +1,5 @@
 """Модель жанров"""
-from models.genre import Genre
+from app.models.genre import Genre
 
 
 class GenreDAO:

@@ -1,5 +1,5 @@
 """Сервис любимых жанров"""
-from dao.genre_favorite import GenreFDAO
+from app.dao.genre_favorite import GenreFDAO
 
 
 class GenreFService:

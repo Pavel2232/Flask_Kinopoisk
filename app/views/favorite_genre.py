@@ -1,9 +1,9 @@
 """Вью любимых жанров"""
 from flask_restx import Namespace, Resource
 
-from decorators import auth_required
-from models.favorite_genre import GenreFSchema
-from constant import genre_service
+from app.decorators import auth_required
+from app.models.favorite_genre import GenreFSchema
+from app.constant import genre_service
 
 genref_ns = Namespace('favorites')
 
