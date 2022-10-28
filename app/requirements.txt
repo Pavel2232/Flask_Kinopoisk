@@ -1,8 +1,10 @@
+alembic==1.8.1
 aniso8601==9.0.1
 attrs==22.1.0
 click==8.1.3
 colorama==0.4.6rc1
 Flask==2.1.2
+Flask-Migrate==3.1.0
 flask-restx==0.5.1
 Flask-SQLAlchemy==2.5.1
 greenlet==2.0.0a2
@@ -10,12 +12,14 @@ importlib-metadata==5.0.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 jsonschema==4.16.0
+Mako==1.2.3
 MarkupSafe==2.1.1
 marshmallow==3.18.0
 packaging==21.3
 PyJWT==2.6.0
 pyparsing==3.0.9
 pyrsistent==0.18.1
+python-dotenv==0.21.0
 pytz==2022.5
 six==1.16.0
 sql==2022.4.0
