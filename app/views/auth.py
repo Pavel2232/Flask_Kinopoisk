@@ -7,27 +7,27 @@ from app.decorators import admin_required
 from app.models.user import UserSchema
 from app.constant import user_service, auth_service
 
-
-
 auth_ns = Namespace('auth')
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+
 
 @auth_ns.route("/register")
 class AuthView(Resource):
     def post(self):
         user = request.json
 
-        email= user.get("email",None)
-        password= user.get("password",None)
+        username = user.get("username", None)
+        password = user.get("password", None)
 
-        if None in [email,password]:
+        if None in [username, password]:
             return abort(400)
 
         user_service.create(user)
 
-        return "",201
+        return "", 201
+
 
 @auth_ns.route('/login')
 class AuthView(Resource):
@@ -45,7 +45,6 @@ class AuthView(Resource):
 
         return tokens, 201
 
-    
     def put(self):
         data = request.json
         token = data.get("refresh_token")
@@ -80,4 +79,3 @@ class AuthView(Resource):
     def delete(self, id):
         user_service.delete(id)
         return "", 204
-

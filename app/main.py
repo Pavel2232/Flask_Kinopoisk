@@ -27,6 +27,8 @@ def configur_app(application: Flask):
     api.add_namespace(user_ns)
     api.add_namespace(auth_ns)
     api.add_namespace(genref_ns)
+    # db.drop_all()
+    # db.create_all()
 
 
 if __name__ == '__main__':
