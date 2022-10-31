@@ -13,7 +13,7 @@ user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
 
-@auth_ns.route("/register")
+@auth_ns.route("/")
 class AuthView(Resource):
     def post(self):
         user = request.json
