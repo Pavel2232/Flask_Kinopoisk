@@ -10,21 +10,21 @@ Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IlFXIi
 
 ###
 
-POST http://127.0.0.1:5000/user/
+POST http://127.0.0.1:80/user/
 Content-Type: application/json
 
 {
   "username": "QW",
-  "password": "test",
+  "password": "teddst",
   "role": "Admin"
 }
 
 ###
 
-POST http://127.0.0.1:5000/auth/
+POST http://127.0.0.1/auth/
 Content-Type: application/json
 
 {
-    "username": "QW",
-    "password": "test"
+    "username": "ddQW",
+    "password": "tdddest"
 }

@@ -16,6 +16,7 @@ def create_app(config: Config)-> Flask:
     application.app_context().push()
     db.init_app(application)
     migrate.init_app(application, db)
+    configur_app(application)
     return application
 
 
@@ -34,5 +35,6 @@ def configur_app(application: Flask):
 if __name__ == '__main__':
     app_config = Config()
     app = create_app(app_config)
-    configur_app(app)
     app.run()
+
+

@@ -1,4 +1,3 @@
-import base64
 class Config():
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://pavel2232:10203040x@postgres/movie'
