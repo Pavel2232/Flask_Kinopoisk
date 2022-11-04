@@ -33,6 +33,6 @@ services:
       - ./app/postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "postgres_isready -U postgres"]
-      interval: 10s
-      timeout: 10s
+      interval: 5s
+      timeout: 5s
       retries: 5

@@ -12,3 +12,13 @@ jobs:
         run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
       - name: docker push
         run: docker push  pavel2232/pablisito:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: clone code
+        uses: actions/checkout@v2
+      - name: render config
+        run:
+          mkdir deploy
+          cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
+          cat docker_ci_config.py
