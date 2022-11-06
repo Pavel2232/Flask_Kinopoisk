@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
       - name: render config
         run: |
-          mkdir deploy
+          cd app
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
           cat config.py | envsubst > deploy/config.py
       - name: copy files to server
