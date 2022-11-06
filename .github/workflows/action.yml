@@ -25,10 +25,9 @@ jobs:
       - name: render config
         run: |
           mkdir deploy
-          cd flask_arch
-          cat docker-compose.yaml | envsubst > /docker-compose.yaml
+          cat docker-compose.yaml | envsubst > deploy/docker-compose1.yaml
           cd app
-          cat config.py | envsubst > deploy/config.py
+          cat config.py | envsubst > deploy/config1.py
       - name: copy files to server
         uses: appleboy/scp-action@master
         with:
