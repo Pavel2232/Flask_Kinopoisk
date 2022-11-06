@@ -29,8 +29,8 @@ services:
       POSTGRES_DB: $DB_NAME
     healthcheck:
       test: ["CMD-SHELL", "postgres_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
+      interval: 10s
+      timeout: 10s
       retries: 5
     volumes:
       - ./app/postgres_data:/var/lib/postgresql/data
