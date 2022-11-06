@@ -26,7 +26,6 @@ jobs:
         run: |
           mkdir deploy
           cat docker-compose.yaml | envsubst > deploy/docker-compose.yaml
-          cd app
           cat /config.py | envsubst > deploy/config.py
       - name: copy files to server
         uses: appleboy/scp-action@master
