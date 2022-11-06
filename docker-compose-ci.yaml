@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  api:
+    image: pavel2232/pablisito:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    ports:
+      - 80:80
+    volumes:
+      - ./config.py:/app/config
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+  migrations:
+    image: pavel2232/pablisito:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./config.py:/app/config.py
+    command:
+      -  flask db upgrade
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    healthcheck:
+      test: ["CMD-SHELL", "postgres_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./app/postgres_data:/var/lib/postgresql/data
