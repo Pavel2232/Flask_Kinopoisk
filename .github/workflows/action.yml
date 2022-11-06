@@ -14,6 +14,11 @@ jobs:
         run: docker push  pavel2232/pablisito:$GITHUB_REF_NAME-$GITHUB_RUN_ID
   deploy:
     runs-on: ubuntu-22.04
+    needs: build_and_push
+    env:
+      DB_USER: ${{secrets.DB_USER}}
+      DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+      DB_NAME: ${{secrets.DB_NAME}}
     steps:
       - name: clone code
         uses: actions/checkout@v2
@@ -21,4 +26,25 @@ jobs:
         run:
           mkdir deploy
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
-          cat docker_ci_config.py
+          cd app
+          cat config.py | envsubst > deploy/docker_config.py
+      - name: copy files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          password: ${{secrets.PASSWORD}}
+          source: "deploy/docker-compose.yaml,deploy/docker_config.py"
+          target: "app"
+          strip_components: 1
+      - name: deploy app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          password: ${{secrets.PASSWORD}}
+          script: |
+            cd app
+            echo ${{secrets.PASSWORD}} | sudo -S docker-compose up -d
+
+

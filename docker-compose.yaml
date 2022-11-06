@@ -26,13 +26,13 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: pavel2232
-      POSTGRES_PASSWORD: 10203040Xx
-      POSTGRES_DB: movie_app
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
     volumes:
       - ./app/postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "postgres_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5

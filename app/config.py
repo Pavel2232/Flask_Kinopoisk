@@ -1,6 +1,6 @@
 class Config():
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://pavel2232:10203040x@postgres/movie'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://$DB_USER:$DB_PASSWORD@postgres/$DB_NAME'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PWD_HASH_SALT = b"secret here"
     PWD_HASH_ITERATIONS = 100_000
