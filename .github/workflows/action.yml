@@ -25,7 +25,7 @@ jobs:
       - name: render config
         run: |
           mkdir deploy
-          cat docker-compose.yaml | envsubst > /docker-compose.yaml
+          sudo cat docker-compose.yaml | envsubst > /docker-compose.yaml
           cd app
           cat config.py | envsubst > deploy/config.py
       - name: copy files to server
