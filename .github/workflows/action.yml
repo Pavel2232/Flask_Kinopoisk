@@ -43,7 +43,7 @@ jobs:
           username: ${{secrets.USERNAME}}
           password: ${{secrets.PASSWORD}}
           script: |
-            sudo apt-get remove docker docker-engine docker.io containerd runc
+            echo ${{secrets.PASSWORD}} | sudo -S apt-get remove docker docker-engine docker.io containerd runc
             cd app
             echo ${{secrets.PASSWORD}} | sudo -S docker-compose up -d
 
