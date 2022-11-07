@@ -20,7 +20,7 @@ services:
     volumes:
       - ./config.py:/app/config.py
     command:
-      -  CMD ["python", "-m", "flask", "db", "upgrade"]
+      -  flask db upgrade
   postgres:
     image: postgres:latest
     environment:
