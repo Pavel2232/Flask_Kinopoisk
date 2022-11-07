@@ -22,7 +22,7 @@ services:
     command:
       -  flask db upgrade
   postgres:
-    image: postgres|latest
+    image: postgres:latest
     environment:
       POSTGRES_USER: $DB_USER
       POSTGRES_PASSWORD: $DB_PASSWORD
