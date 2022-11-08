@@ -1,6 +1,7 @@
 FROM python:3.10.6
 
 WORKDIR /app
+COPY .flaskenv .
 COPY docker-compose.yaml .
 COPY app .
 RUN pip install -r requirements.txt
