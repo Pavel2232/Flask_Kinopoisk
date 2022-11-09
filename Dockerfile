@@ -4,7 +4,7 @@ WORKDIR /app
 COPY docker-compose.yaml .
 COPY app .
 RUN pip install -r requirements.txt
-ENTRYPOINT ["bash", "entrypoint.sh"]
+#ENTRYPOINT ["bash", "entrypoint.sh"]
 
 
 
