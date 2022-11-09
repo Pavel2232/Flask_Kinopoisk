@@ -4,7 +4,7 @@ services:
   api:
     image: pavel2232/pablisito:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
-    - 8000:80
+      - 8000:80
     depends_on:
       postgres:
         condition: service_healthy
@@ -23,6 +23,8 @@ services:
       -  flask db upgrade
   postgres:
     image: postgres:latest
+    ports:
+      - 7432:5432
     environment:
       POSTGRES_USER: $DB_USER
       POSTGRES_PASSWORD: $DB_PASSWORD
