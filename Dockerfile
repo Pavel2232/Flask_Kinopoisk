@@ -4,7 +4,8 @@ WORKDIR /app
 COPY docker-compose.yaml .
 COPY app .
 RUN pip install -r requirements.txt
-#ENTRYPOINT ["bash", "entrypoint.sh"]
+ENV FLASK_APP=main:create_app("app.config")
+ENTRYPOINT ["bash", "entrypoint.sh"]
 
 
 
