@@ -16,9 +16,9 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build_and_push
     env:
-      DB_USER: ${{secrets.DB_USER}}
-      DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-      DB_NAME: ${{secrets.DB_NAME}}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_NAME: ${{ secrets.DB_NAME }}
     steps:
       - name: clone code
         uses: actions/checkout@v3
@@ -39,10 +39,10 @@ jobs:
       - name: deploy app
         uses: appleboy/ssh-action@master
         with:
-          host: ${{secrets.HOST}}
-          username: ${{secrets.USERNAME}}
-          password: ${{secrets.PASSWORD}}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME} }
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd app
-            echo ${{secrets.PASSWORD}} | sudo -S docker-compose down
-            echo ${{secrets.PASSWORD}} | sudo -S docker-compose up -d
+            echo ${{ secrets.PASSWORD }} | sudo -S docker-compose down
+            echo ${{ secrets.PASSWORD }} | sudo -S docker-compose up -d
